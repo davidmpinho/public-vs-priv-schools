@@ -13,20 +13,20 @@ predictors of that inflation?
 
 For the first question, the school-level data (in /data/) is scraped using
 Scrapy (see code in /python_scripts/school_rank/). The second one is answered
-using student-level data from [IAVE](https://www.dge.mec.pt/relatoriosestatisticas-0).
+using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatisticas-0).
 
 ### Major TODOs for the first question
 
 1. Continue building Stan models and the respective simulations (in
 /python_scripts/stan_utils/sim_helper.py) that allow for:
-    - Spatial relationships (with gaussian processes/gaussian random fields)
-    - Missing data imputation
-    - Measurement error
+    - Spatial relationships (with gaussian processes/gaussian random fields);
+    - Missing data imputation;
+    - Measurement error.
 
 2. Make corrections to the 2016 data set (the website I'm scraping it from has
 a different format for the tables in that year). 
 
-3. Manually gather the coordinates ~640 schools (this will be fun...).
+3. Manually gather the coordinates for ~640 schools (this will be fun...).
 
 4. Fit the model analyze the results (this will actually be fun, but it never 
 lasts).
