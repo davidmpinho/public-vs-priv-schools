@@ -15,7 +15,7 @@ For the first question, the school-level data (in /data/) is scraped using
 Scrapy (see code in /python_scripts/school_rank/). The second one is answered
 using student-level data from [IAVE](https://www.dge.mec.pt/relatoriosestatisticas-0).
 
-Major TODOs for the first question:
+### Major TODOs for the first question
 
 1. Continue building Stan models and the respective simulations (in
 /python_scripts/stan_utils/sim_helper.py) that allow for:
@@ -33,7 +33,7 @@ lasts).
 
 5. Write an article about it (maybe with a dashboard?).
 
-Major TODOs for the second question:
+### Major TODOs for the second question
 
 1. Everything (but it is *much* more straightforward to model this and clean
 the data).
