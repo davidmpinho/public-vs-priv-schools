@@ -2,6 +2,8 @@ import os
 import sys
 import unittest
 
+
+# TODO: this is not updated 
 dir_py_scripts = '/'.join(os.getcwd().split('/')[0:-2])
 sys.path.insert(0, dir_py_scripts)
 from school_rank.spiders.school_rank_spider import SchoolRankSpider

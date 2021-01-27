@@ -2,7 +2,8 @@ import scrapy
 import re
 from school_rank.items import SchoolRankItem
 
-# TODO: I am pretty sure I can start with /tbody/ and this will pick it up, although I am not sure.
+
+# TODO: I am pretty sure I can start with /tbody/ and this will pick it up
 class SchoolRankSpider(scrapy.Spider):
     name = 'school_rank_spider'
 
@@ -33,7 +34,8 @@ class SchoolRankSpider(scrapy.Spider):
 
         table_aux_selectors = response.xpath(
             xpath_tables_aux + '/td[contains(@class, "columnDetailsInner")]')
-        dict_table_aux = self.tables_aux_to_dict(selectors=table_aux_selectors)
+        dict_table_aux = self.tables_aux_to_dict(selectors=table_aux_selectors,
+                                                 is_2016=('2016' in str(response)))
 
         item = SchoolRankItem()
         item['name_file'] = response.url.split('/')[-1].split('.')[0]
@@ -49,7 +51,7 @@ class SchoolRankSpider(scrapy.Spider):
 
     @staticmethod
     def table_main_to_dict(columns: list, text: list, start_col: int,
-                      end_col: int, mod: int) -> dict:
+                           end_col: int, mod: int) -> dict:
         dictionary = {}
         for i in range(start_col, end_col+1):
             dictionary.update(
@@ -67,40 +69,50 @@ class SchoolRankSpider(scrapy.Spider):
     def ith_value_of_list(lst: list, i: int, mod: int) -> list:
         return [x for j, x in enumerate(lst) if (((j - i) % mod) == 0)]
 
-    def tables_aux_to_dict(self, selectors: list) -> dict:
+    def tables_aux_to_dict(self, selectors: list, is_2016: bool) -> dict:
+        if is_2016:
+            mod = 38
+        else:
+            mod = 45
         dictionary = {}
         tables_selector = selectors.xpath('./table[not(contains(@class, "tableExtra"))]')
         data = self.clean_text_list(tables_selector.xpath('.//text()').getall())
-        dictionary['grade_averages'] = {'exam': {
-            'biology_geology': self.ith_value_of_list(lst=data, mod=45, i=4),
-            'math': self.ith_value_of_list(lst=data, mod=45, i=7),
-            'portuguese': self.ith_value_of_list(lst=data, mod=45, i=10),
-            'physics_chemistry': self.ith_value_of_list(lst=data, mod=45, i=13)},
-                                       'internal': {
-            'biology_geology': self.ith_value_of_list(lst=data, mod=45, i=5),
-            'math': self.ith_value_of_list(lst=data, mod=45, i=8),
-            'portuguese': self.ith_value_of_list(lst=data, mod=45, i=11),
-            'physics_chemistry': self.ith_value_of_list(lst=data, mod=45, i=14)}}
-        dictionary['retention_rate'] = {'school_average': {
-            '12th_grade': self.ith_value_of_list(lst=data, mod=45, i=19),
-            '11th_grade': self.ith_value_of_list(lst=data, mod=45, i=22),
-            '10th_grade': self.ith_value_of_list(lst=data, mod=45, i=25)},
-                                        'national_average': {
-            '12th_grade': self.ith_value_of_list(lst=data, mod=45, i=20),
-            '11th_grade': self.ith_value_of_list(lst=data, mod=45, i=23),
-            '10th_grade': self.ith_value_of_list(lst=data, mod=45, i=26)}}
-        dictionary['indicators'] = {'school_average': {
-            'pct_stud_in_need_12th_grade': self.ith_value_of_list(lst=data, mod=45, i=28),
-            'pct_profs_on_the_board': self.ith_value_of_list(lst=data, mod=45, i=31)},
-                                    'national_average': {
-            'pct_stud_in_need_12th_grade': self.ith_value_of_list(lst=data, mod=45, i=29),
-            'pct_profs_on_the_board': self.ith_value_of_list(lst=data, mod=45, i=32)}}
-        dictionary['parents_education'] = {
-            'average_dads': self.ith_value_of_list(lst=data, mod=45, i=36),
-            'average_moms': self.ith_value_of_list(lst=data, mod=45, i=37)}
-        dictionary['ranking'] = {
-            '2019': self.ith_value_of_list(lst=data, mod=45, i=42),
-            '2018': self.ith_value_of_list(lst=data, mod=45, i=43),
-            'change': self.ith_value_of_list(lst=data, mod=45, i=44)}
-        return dictionary
+        dictionary['grade_averages'] = {
+            'exam': {
+                'biology_geology': self.ith_value_of_list(lst=data, mod=mod, i=4),
+                'math': self.ith_value_of_list(lst=data, mod=mod, i=7),
+                'portuguese': self.ith_value_of_list(lst=data, mod=mod, i=10),
+                'physics_chemistry': self.ith_value_of_list(lst=data, mod=mod, i=13)},
+            'internal': {
+                'biology_geology': self.ith_value_of_list(lst=data, mod=mod, i=5),
+                'math': self.ith_value_of_list(lst=data, mod=mod, i=8),
+                'portuguese': self.ith_value_of_list(lst=data, mod=mod, i=11),
+                'physics_chemistry': self.ith_value_of_list(lst=data, mod=mod, i=14)}}
+        if is_2016:
+            dictionary['retention_rate'] = {
+                'school_average': {
+                    '12th_grade': self.ith_value_of_list(lst=data, mod=mod, i=17),
+                    '11th_grade': self.ith_value_of_list(lst=data, mod=mod, i=19),
+                    '10th_grade': self.ith_value_of_list(lst=data, mod=mod, i=21)}}
+            dictionary['indicators'] = {
+                'school_average': {
+                    'pct_stud_in_need_12th_grade': self.ith_value_of_list(lst=data, mod=mod, i=23),
+                    'pct_profs_on_the_board': self.ith_value_of_list(lst=data, mod=mod, i=25)}}
+            dictionary['parents_education'] = {
+                'average_dads': self.ith_value_of_list(lst=data, mod=mod, i=29),
+                'average_moms': self.ith_value_of_list(lst=data, mod=mod, i=30)}
+        else:
+            dictionary['retention_rate'] = {
+                'school_average': {
+                    '12th_grade': self.ith_value_of_list(lst=data, mod=mod, i=19),
+                    '11th_grade': self.ith_value_of_list(lst=data, mod=mod, i=22),
+                    '10th_grade': self.ith_value_of_list(lst=data, mod=mod, i=25)}}
+            dictionary['indicators'] = {
+                'school_average': {
+                    'pct_stud_in_need_12th_grade': self.ith_value_of_list(lst=data, mod=mod, i=28),
+                    'pct_profs_on_the_board': self.ith_value_of_list(lst=data, mod=mod, i=31)}}
+            dictionary['parents_education'] = {
+                'average_dads': self.ith_value_of_list(lst=data, mod=mod, i=36),
+                'average_moms': self.ith_value_of_list(lst=data, mod=mod, i=37)}
 
+        return dictionary

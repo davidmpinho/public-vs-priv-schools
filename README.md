@@ -15,7 +15,7 @@ For the first question, the school-level data (in /data/) is scraped using
 Scrapy (see code in /python_scripts/school_rank/). The second one is answered
 using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatisticas-0).
 
-### Major TODOs for the first question
+### Major to-do tasks for the first question
 
 1. Continue building Stan models and the respective simulations (in
 /python_scripts/stan_utils/sim_helper.py) that allow for:
@@ -23,21 +23,20 @@ using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatistic
     - Missing data imputation;
     - Measurement error.
 
-2. Make corrections to the 2016 data set (the website I'm scraping it from has
-a different format for the tables in that year). 
+2. Manually gather the coordinates for ~640 schools (this will be fun...).
 
-3. Manually gather the coordinates for ~640 schools (this will be fun...).
-
-4. Fit the model analyze the results (this will actually be fun, but it never 
+3. Fit the model analyze the results (this will actually be fun, but it never 
 lasts).
 
-5. Write an article about it (maybe with a dashboard?).
+4. Write an article about it. The idea is to have a more technical case study
+on using complex models with small data sets (similar to [Michael Betancourt's](https://betanalpha.github.io/writing/) 
+case studies, but with more applied, rather than introductory, material), and
+then a more accessible article showing the results with a dashboard. 
 
-### Major TODOs for the second question
+### Major to-do tasks for the second question
 
-1. Everything (but it is *much* more straightforward to model this and clean
-the data).
-
-
+1. Figure out the causal model. I am pretty sure I can't put every variable in there.  
+2. Based on the causal model, merge the data sets with whatever is needed.
+3. Build a model for this (similar to the first one, but simpler). 
 
 
