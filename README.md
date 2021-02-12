@@ -18,25 +18,24 @@ using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatistic
 ### Major to-do tasks for the first question
 
 1. Continue building Stan models and the respective simulations (in
-/python_scripts/stan_utils/sim_helper.py) that allow for:
-    - Spatial relationships (with gaussian processes/gaussian random fields);
+/src/stan_utils/sim_helper.py) that allow for:
+    - Spatial relationships (with gaussian processes/random fields);
     - Missing data imputation;
     - Measurement error.
 
-2. Manually gather the coordinates for ~640 schools (this will be fun...).
+2. Fit the model analyze the results.
 
-3. Fit the model analyze the results (this will actually be fun, but it never 
-lasts).
-
-4. Write an article about it. The idea is to have a more technical case study
+3. Write an article about it. The idea is to have a more technical case study
 on using complex models with small data sets (similar to [Michael Betancourt's](https://betanalpha.github.io/writing/) 
-case studies, but with more applied, rather than introductory, material), and
+case studies but with more applied, rather than introductory, material), and
 then a more accessible article showing the results with a dashboard. 
+
+All of this is being done as I develop (what will become) a package for prior predictive 
+simulations (in /src/stan_utils/sim_helper.py).
 
 ### Major to-do tasks for the second question
 
-1. Figure out the causal model. I am pretty sure I can't put every variable in there.  
-2. Based on the causal model, merge the data sets with whatever is needed.
-3. Build a model for this (similar to the first one, but simpler). 
+1. Do experiments (with simulated data) to figure out how long it takes to run even a basic model. 
+2. Iterate on that model. 
 
 
