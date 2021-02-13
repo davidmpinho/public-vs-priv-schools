@@ -9,11 +9,12 @@ the student's characteristics? Or because they are of higher (average)
 quality relative to comparable schools?
 
 2. In general, how much grade inflation is there? What are the best
-predictors of that inflation?
+predictors of that grade inflation?
 
-For the first question, the school-level data (in /data/) is scraped using
-Scrapy (see code in /python_scripts/school_rank/). The second one is answered
+For the first question, the school-level data (in /data/raw) is scraped using
+Scrapy (see code in /src/school_rank/). The second one is answered
 using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatisticas-0).
+All the data has been processed (/data/processed/). Now I am building the models (almost done).
 
 ### Major to-do tasks for the first question
 
