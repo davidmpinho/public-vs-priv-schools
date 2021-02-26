@@ -1,5 +1,6 @@
 # Comparison of Portuguese public and private schools' grades (WIP)
 
+
 This is a personal project in progress. 
 
 There are two topics I want to address:
@@ -16,27 +17,33 @@ Scrapy (see code in /src/school_rank/). The second one is answered
 using student-level data from [DGES](https://www.dge.mec.pt/relatoriosestatisticas-0).
 All the data has been processed (/data/processed/). Now I am building the models (almost done).
 
+### What I've done so far
+
+* Scraped and processed all the data (in /data/processed/) 
+* Finish most of the basic functionality for (what will eventually become) a Python package for probabilistic  
+simulations (in /src/stan_utils/sim_helper.py)
+* Developed a new(?) type of [spline model]() that runs faster and has more interpretable priors.
+I also searched around for other models. 
+
 ### Major to-do tasks for the first question
 
 1. Continue building Stan models and the respective simulations (in
 /src/stan_utils/sim_helper.py) that allow for:
     - Spatial relationships (with gaussian processes/random fields);
-    - Missing data imputation;
-    - Measurement error.
+    - Integrate missing data imputation and measurement error.
 
 2. Fit the model analyze the results.
 
 3. Write an article about it. The idea is to have a more technical case study
-on using complex models with small data sets (similar to [Michael Betancourt's](https://betanalpha.github.io/writing/) 
-case studies but with more applied, rather than introductory, material), and
-then a more accessible article showing the results with a dashboard. 
-
-All of this is being done as I develop (what will become) a package for prior predictive 
-simulations (in /src/stan_utils/sim_helper.py).
+on using complex models with small data sets (similar to 
+[Michael Betancourt's](https://betanalpha.github.io/writing/) 
+case studies but with more applied, rather than introductory, material).
 
 ### Major to-do tasks for the second question
 
 1. Do experiments (with simulated data) to figure out how long it takes to run even a basic model. 
 2. Iterate on that model. 
+3. Make an accessible article showing the results with a dashboard. 
+
 
 
