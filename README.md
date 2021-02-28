@@ -22,8 +22,10 @@ All the data has been processed (/data/processed/). Now I am building the models
 * Scraped and processed all the data (in /data/processed/) 
 * Finish most of the basic functionality for (what will eventually become) a Python package for probabilistic  
 simulations (in /src/stan_utils/sim_helper.py)
-* Developed a new(?) type of [spline model]() that runs faster and has more interpretable priors.
-I also searched around for other models. 
+* Developed a new(?) type of [spline model](https://github.com/davidmpinho/custom-models/blob/main/regression/fast_1d_splines.stan)
+that runs faster and has more interpretable priors.
+I have also selected a few other 'parts' for my model that still need to be adapted to my particular problem (with missing 
+data and such). 
 
 ### Major to-do tasks for the first question
 
