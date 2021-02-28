@@ -8,7 +8,7 @@ def sim_model_s1_a(n_sims: int, seed: int = 1):
     years to make the model simpler, thus ignoring year-to-year variability,
     which is why I perform the 'groupby' operations at the end.
 
-    There is one confounder: counties with more schools have better grades.
+    There is one confounder: counties with more schools have better socioeconomic conditions.
     """
     # Create the levels (i.e., hierarchical structure)
     sim = sh.PriorSim(n_sims=n_sims, levels={'county': 300}, seed=seed)
